@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timelens_dashboard/core/widgets/custom_appbar.dart';
 import 'package:timelens_dashboard/features/add_era/presentation/views/widgets/add_era_view_body.dart';
 
 class AddEraView extends StatelessWidget {
@@ -8,12 +9,9 @@ class AddEraView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: AddEraViewBody()
-        ),
-      ),
+    return Scaffold(
+      appBar: buildAppBar('Add Era'),
+      body: const AddEraViewBody(),
     );
   }
 }

@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return const MaterialApp(
+        return MaterialApp(
+          theme: ThemeData(scaffoldBackgroundColor: const Color(0xFF1E1E1E)),
           debugShowCheckedModeBanner: false,
           onGenerateRoute: onGenerateRoutes,
           initialRoute: DashboardView.routeName,
