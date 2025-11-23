@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timelens_dashboard/core/helper_functions/ongenerate_routes.dart';
+import 'package:timelens_dashboard/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,12 +10,19 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: onGenerateRoutes,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: onGenerateRoutes,
+          initialRoute: DashboardView.routeName,
+        );
+      },
     );
   }
 }
