@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import 'package:timelens_dashboard/core/widgets/custom_form_text_field.dart';
 import 'package:timelens_dashboard/core/widgets/image_field.dart';
+import 'package:timelens_dashboard/features/add_era/domain/entities/add_era_entity.dart';
 
 class AddEraViewBody extends StatefulWidget {
   const AddEraViewBody({super.key});
@@ -68,7 +69,12 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                   onTap: () {
                     if (addEraFormKey.currentState!.validate()) {
                       addEraFormKey.currentState!.save();
-                      // Perform add era action here
+                      AddEraEntity inputImage = AddEraEntity(
+                        eraName: eraName,
+                        eraCode: eraCode,
+                        description: eraPeriod,
+                        imagePath: eraImage.path,
+                      );
                     } else {
                       setState(() {
                         autoValidateMode = AutovalidateMode.always;
