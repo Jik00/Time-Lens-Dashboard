@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:timelens_dashboard/constants.dart';
 import 'package:timelens_dashboard/core/helper_functions/ongenerate_routes.dart';
 import 'package:timelens_dashboard/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: kSupaURL,
+    anonKey: kSupaKey,
+  );
   runApp(const MyApp());
 }
 
