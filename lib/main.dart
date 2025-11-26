@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timelens_dashboard/constants.dart';
 import 'package:timelens_dashboard/core/helper_functions/ongenerate_routes.dart';
+import 'package:timelens_dashboard/core/services/custom_bloc_observer.dart';
+import 'package:timelens_dashboard/core/services/get_it_service.dart';
 import 'package:timelens_dashboard/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,6 +14,8 @@ void main() async {
     url: kSupaURL,
     anonKey: kSupaKey,
   );
+  setupGetIt();
+  Bloc.observer = CustomBlocObserver();
   runApp(const MyApp());
 }
 

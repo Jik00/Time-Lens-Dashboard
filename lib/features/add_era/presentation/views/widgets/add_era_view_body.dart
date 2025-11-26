@@ -1,10 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import 'package:timelens_dashboard/core/widgets/custom_form_text_field.dart';
 import 'package:timelens_dashboard/core/widgets/image_field.dart';
-import 'package:timelens_dashboard/features/add_era/domain/entities/add_era_entity.dart';
+import 'package:timelens_dashboard/features/add_era/domain/entities/era_entity.dart';
+import 'package:timelens_dashboard/features/add_era/presentation/cubit/add_era_cubit.dart';
 
 class AddEraViewBody extends StatefulWidget {
   const AddEraViewBody({super.key});
@@ -66,15 +67,18 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                   w: 330,
                   borderColor: const Color(0xFFBC8729),
                   fillColor: const Color(0xFF614317),
-                  onTap: () {
+                  onTap: () async {
                     if (addEraFormKey.currentState!.validate()) {
                       addEraFormKey.currentState!.save();
-                      AddEraEntity inputImage = AddEraEntity(
+
+                      final eraEntity = EraEntity(
                         eraName: eraName,
                         eraCode: eraCode,
-                        description: eraPeriod,
-                        imagePath: eraImage.path,
+                        eraPeriod: eraPeriod,
+                        imageFile: eraImage,
                       );
+
+                      context.read<AddEraCubit>().addEra(eraEntity);
                     } else {
                       setState(() {
                         autoValidateMode = AutovalidateMode.always;

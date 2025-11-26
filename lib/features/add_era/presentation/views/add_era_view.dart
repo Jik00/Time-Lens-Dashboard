@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:timelens_dashboard/core/repos/era_repo/era_repo.dart';
+import 'package:timelens_dashboard/core/services/get_it_service.dart';
 import 'package:timelens_dashboard/core/widgets/custom_appbar.dart';
+import 'package:timelens_dashboard/features/add_era/presentation/cubit/add_era_cubit.dart';
 import 'package:timelens_dashboard/features/add_era/presentation/views/widgets/add_era_view_body.dart';
 
 class AddEraView extends StatelessWidget {
@@ -11,7 +15,12 @@ class AddEraView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar('Add Era'),
-      body: const AddEraViewBody(),
+      body: BlocProvider(
+        create: (context) => AddEraCubit(
+          getIt.get<EraRepo>(),
+        ),
+        child: const AddEraViewBody(),
+      ),
     );
   }
 }
