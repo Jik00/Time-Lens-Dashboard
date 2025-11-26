@@ -9,15 +9,14 @@ class SupabaseEraDataSource {
 
   Future<void> insertEra(Map<String, dynamic> data) async {
     try {
-      debugPrint("Inserting data into table: $kSupaErasTable");
-      debugPrint("Data: $data");
-
+      // remember to remove respone 
       final response = await supabase
           .from(kSupaErasTable)
           .insert(data)
           .select(); // Add .select() to get response
 
       debugPrint("Insert response: $response");
+      
     } catch (e) {
       debugPrint("Database insert error: $e");
       rethrow;

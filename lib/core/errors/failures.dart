@@ -6,3 +6,12 @@ abstract class Failure {
 class ServerFailure extends Failure {
   ServerFailure(super.message);
 }
+class NetworkFailure extends Failure {
+  NetworkFailure(super.message);
+}
+class StorageFailure extends Failure {
+  StorageFailure(super.message);
+}
+class DatabaseFailure extends Failure {
+  DatabaseFailure(super.message);
+}

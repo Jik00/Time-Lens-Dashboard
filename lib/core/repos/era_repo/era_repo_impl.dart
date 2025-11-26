@@ -1,5 +1,6 @@
+import 'dart:io';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timelens_dashboard/core/errors/failures.dart';
 import 'package:timelens_dashboard/core/repos/era_repo/era_repo.dart';
 import 'package:timelens_dashboard/core/services/storage_service.dart';
@@ -18,17 +19,13 @@ class EraRepoImpl implements EraRepo {
   @override
   Future<Either<Failure, void>> addEra(EraEntity eraEntity) async {
     try {
-      
-      debugPrint("STEP 0: Starting era addition...");
 
       String imageUrl = await storageService.uploadFile(
         eraEntity.imageFile,
-        eraEntity.eraCode, // folder name inside bucket
+        eraEntity.eraCode, // saved inside by eraCode
       );
 
-      debugPrint("STEP 1: Upload done, imgUlr = $imageUrl");
-
-      // 2. Prepare model for DB insertion
+      // create EraModel with imageUrl
       final model = EraModel(
         eraName: eraEntity.eraName,
         eraPeriod: eraEntity.eraPeriod,
@@ -38,17 +35,19 @@ class EraRepoImpl implements EraRepo {
         createdAt: DateTime.now(),
       );
 
-      debugPrint("STEP 2: Inserting era into database...");
-
-      // 3. Insert into Supabase table
+      // convert entity to model then insert into Supa
       await dataSource.insertEra(model.toMap());
 
-      debugPrint("STEP 3: Era inserted successfully");
-
       return const Right(null);
+
+    } on StorageException catch (e) {
+      return Left(StorageFailure('Failed to upload image: ${e.message}'));
+    } on PostgrestException catch (e) {
+      return Left(DatabaseFailure('Database error: ${e.message}'));
+    } on SocketException catch (e) {
+      return Left(NetworkFailure('Network error: ${e.message}'));
     } catch (e) {
-      debugPrint('Error adding era: $e');
-      return Left(ServerFailure(e.toString()));
+      return Left(ServerFailure('Unexpected error: $e'));
     }
   }
 }

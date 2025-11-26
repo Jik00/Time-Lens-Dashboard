@@ -1,16 +1,26 @@
 part of 'add_era_cubit.dart';
 
 @immutable
-sealed class AddEraCubitState {}
+abstract class AddEraCubitState {
+  final String? errorMessage;
+  
+  const AddEraCubitState({this.errorMessage});
+}
 
-final class AddEraCubitInitial extends AddEraCubitState {}
+class AddEraCubitInitial extends AddEraCubitState {
+  const AddEraCubitInitial() : super(errorMessage: null);
+}
 
-final class AddEraCubitLoading extends AddEraCubitState {}
+class AddEraCubitLoading extends AddEraCubitState {
+  const AddEraCubitLoading() : super(errorMessage: null);
+}
 
-final class AddEraCubitSuccess extends AddEraCubitState {}
+class AddEraCubitSuccess extends AddEraCubitState {
+  const AddEraCubitSuccess() : super(errorMessage: null);
+}
 
-final class AddEraCubitFailure extends AddEraCubitState {
-  final String errorMessage;
-
-  AddEraCubitFailure(this.errorMessage);
+class AddEraCubitFailure extends AddEraCubitState {
+  final String message;
+  
+  const AddEraCubitFailure(this.message) : super(errorMessage: message);
 }
