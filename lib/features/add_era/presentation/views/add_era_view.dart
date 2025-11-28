@@ -4,7 +4,7 @@ import 'package:timelens_dashboard/core/repos/era_repo/era_repo.dart';
 import 'package:timelens_dashboard/core/services/get_it_service.dart';
 import 'package:timelens_dashboard/core/widgets/custom_appbar.dart';
 import 'package:timelens_dashboard/features/add_era/presentation/cubit/add_era_cubit.dart';
-import 'package:timelens_dashboard/features/add_era/presentation/views/widgets/add_era_view_body.dart';
+import 'package:timelens_dashboard/features/add_era/presentation/views/widgets/add_era_view_body_builder.dart';
 
 class AddEraView extends StatelessWidget {
   const AddEraView({super.key});
@@ -19,7 +19,7 @@ class AddEraView extends StatelessWidget {
         create: (context) => AddEraCubit(
           getIt.get<EraRepo>(),
         ),
-        child: const AddEraViewBody(),
+        child: const AddEraViewBodyBuilder(),
       ),
     );
   }
