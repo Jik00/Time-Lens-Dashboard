@@ -19,8 +19,19 @@ AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
 late String eraName, eraPeriod, eraCode;
 late File eraImage;
+final TextEditingController eraNameController = TextEditingController();
+final TextEditingController eraCodeController = TextEditingController();
 
 class _AddEraViewBodyState extends State<AddEraViewBody> {
+  @override
+  void initState() {
+    super.initState();
+    eraNameController.addListener(() {
+      eraCodeController.text =
+          eraNameController.text.toLowerCase().replaceAll(' ', '_');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -34,6 +45,8 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
             child: Column(
               children: [
                 CustomFormTextfield(
+                  controller: eraNameController,
+                  readOnly: false,
                   hintText: 'Era Name',
                   onSaved: (value) {
                     eraName = value!;
@@ -41,6 +54,7 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                 ),
                 const SizedBox(height: 20),
                 CustomFormTextfield(
+                  readOnly: false,
                   hintText: 'Era Period',
                   onSaved: (value) {
                     eraPeriod = value!;
@@ -48,9 +62,11 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                 ),
                 const SizedBox(height: 20),
                 CustomFormTextfield(
+                  controller: eraCodeController,
+                  readOnly: true,
                   hintText: 'Era Code',
                   onSaved: (value) {
-                    eraCode = value!.toLowerCase();
+                    eraCode = value!;
                   },
                 ),
                 const SizedBox(height: 20),

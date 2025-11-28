@@ -5,16 +5,19 @@ class CustomFormTextfield extends StatelessWidget {
   const CustomFormTextfield(
       {super.key,
       required this.hintText,
+      required this.readOnly,
       this.suffixIcon,
       this.prefixIcon,
       this.onSaved,
-      this.maxLines});
-
+      this.maxLines,
+      this.controller});
 
   final String hintText;
+  final bool readOnly;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final int? maxLines;
+  final TextEditingController? controller;
   final void Function(String?)? onSaved;
 
   @override
@@ -22,6 +25,8 @@ class CustomFormTextfield extends StatelessWidget {
     return SizedBox(
       width: 330.w,
       child: TextFormField(
+          controller: controller,
+          readOnly: readOnly,
           onSaved: onSaved,
           validator: (value) {
             if (value == null || value.isEmpty) {
@@ -29,7 +34,7 @@ class CustomFormTextfield extends StatelessWidget {
             }
             return null;
           },
-          maxLines: maxLines?? 1,
+          maxLines: maxLines ?? 1,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             labelText: hintText,
@@ -63,7 +68,7 @@ class CustomFormTextfield extends StatelessWidget {
             enabled: true,
             enabledBorder: buildBorder(),
             border: buildBorder(),
-          )),
+          ),),
     );
   }
 
