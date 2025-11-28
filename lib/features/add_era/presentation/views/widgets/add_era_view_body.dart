@@ -8,30 +8,22 @@ import 'package:timelens_dashboard/features/add_era/domain/entities/era_entity.d
 import 'package:timelens_dashboard/features/add_era/presentation/cubit/add_era_cubit.dart';
 
 class AddEraViewBody extends StatefulWidget {
-  const AddEraViewBody({super.key});
+  final AddEraCubitState state;
+  const AddEraViewBody({super.key, required this.state});
 
   @override
   State<AddEraViewBody> createState() => _AddEraViewBodyState();
 }
 
-GlobalKey<FormState> addEraFormKey = GlobalKey<FormState>();
+final GlobalKey<FormState> addEraFormKey = GlobalKey<FormState>();
 AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
 late String eraName, eraPeriod, eraCode;
-late File eraImage;
+File? eraImage;
 final TextEditingController eraNameController = TextEditingController();
 final TextEditingController eraCodeController = TextEditingController();
 
 class _AddEraViewBodyState extends State<AddEraViewBody> {
-  @override
-  void initState() {
-    super.initState();
-    eraNameController.addListener(() {
-      eraCodeController.text =
-          eraNameController.text.toLowerCase().replaceAll(' ', '_');
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -74,8 +66,9 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                   width: double.infinity,
                   height: 200,
                   onImageChanged: (value) {
-                    eraImage = value!;
+                    eraImage = value;
                   },
+
                 ),
                 const SizedBox(height: 40),
                 CustomButton(
@@ -84,20 +77,27 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                   borderColor: const Color(0xFFBC8729),
                   fillColor: const Color(0xFF614317),
                   onTap: () async {
-                    if (addEraFormKey.currentState!.validate()) {
+                    if (addEraFormKey.currentState!.validate() &&
+                        eraImage != null) {
                       addEraFormKey.currentState!.save();
 
                       final eraEntity = EraEntity(
                         eraName: eraName,
                         eraCode: eraCode,
                         eraPeriod: eraPeriod,
-                        imageFile: eraImage,
+                        imageFile: eraImage!,
                       );
 
                       context.read<AddEraCubit>().addEra(eraEntity);
                     } else {
                       setState(() {
                         autoValidateMode = AutovalidateMode.always;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please pick all the fields!'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
                       });
                     }
                   },
@@ -108,5 +108,43 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    eraNameController.addListener(() {
+      eraCodeController.text =
+          eraNameController.text.toLowerCase().replaceAll(' ', '_');
+    });
+  }
+
+  @override
+  void dispose() {
+    eraNameController.dispose();
+    eraCodeController.dispose();
+    super.dispose();
+  }
+
+  void clearForm() {
+    addEraFormKey.currentState?.reset();
+    eraNameController.clear();
+    eraCodeController.clear();
+    setState(() {
+      eraName = '';
+      eraCode = '';
+      eraPeriod = '';
+      autoValidateMode = AutovalidateMode.disabled;
+    });
+  }
+
+  @override
+  void didUpdateWidget(AddEraViewBody oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.state is AddEraCubitInitial &&
+        oldWidget.state is AddEraCubitSuccess) {
+      clearForm();
+    }
   }
 }

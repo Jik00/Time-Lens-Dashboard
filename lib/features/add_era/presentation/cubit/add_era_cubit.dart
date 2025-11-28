@@ -25,4 +25,7 @@ class AddEraCubit extends Cubit<AddEraCubitState> {
       },
     );
   }
+  void resetForm() {
+    emit(const AddEraCubitInitial());
+  }
 }
