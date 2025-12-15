@@ -59,6 +59,18 @@ class AdminActionViewBody extends StatelessWidget {
             fillColor: const Color(0xFF614317),
             borderColor: const Color(0xFFBC8729),
           ),
+          SizedBox(
+            height: 20.h,
+          ),
+          CustomButton(
+            hint: 'View',
+            w: 330,
+            onTap: () {
+              // Navigator.pushNamed(context, AddEraView.routeName);
+            },
+            fillColor: const Color(0xFF614317),
+            borderColor: const Color(0xFFBC8729),
+          ),
         ],
       ),
     );
