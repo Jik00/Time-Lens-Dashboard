@@ -68,7 +68,6 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                   onImageChanged: (value) {
                     eraImage = value;
                   },
-
                 ),
                 const SizedBox(height: 40),
                 CustomButton(
@@ -113,14 +112,19 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
   @override
   void initState() {
     super.initState();
-    eraNameController.addListener(() {
-      eraCodeController.text =
-          eraNameController.text.toLowerCase().replaceAll(' ', '_');
-    });
+
+    eraNameController.addListener(_updateCode);
+  }
+
+  void _updateCode() {
+    if (!mounted) return; // <--- prevents using after dispose
+    eraCodeController.text =
+        eraNameController.text.toLowerCase().replaceAll(RegExp(r'\s+'), '_');
   }
 
   @override
   void dispose() {
+    eraNameController.removeListener(_updateCode);
     eraNameController.dispose();
     eraCodeController.dispose();
     super.dispose();
