@@ -4,7 +4,7 @@ import 'package:timelens_dashboard/features/dashboard/presentation/views/widgets
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
 
-  static const String routeName = 'splash';
+  static const String routeName = 'dashboard';
 
   @override
   Widget build(BuildContext context) {
