@@ -1,0 +1,4 @@
+enum TargetCategory {
+  era,
+  figure,
+}

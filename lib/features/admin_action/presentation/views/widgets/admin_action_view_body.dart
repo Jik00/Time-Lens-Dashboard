@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:timelens_dashboard/core/enums/navigate_enums.dart';
+import 'package:timelens_dashboard/features/add_era/presentation/views/add_era_view.dart';
+
+import '../../../../../core/widgets/custom_button.dart';
+
+class AdminActionViewBody extends StatelessWidget {
+  const AdminActionViewBody({super.key, required this.targetCategory});
+
+  final TargetCategory targetCategory;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Pick Your Action',
+            style: TextStyle(
+                color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600),
+          ),
+          SizedBox(
+            height: 32.h,
+          ),
+          CustomButton(
+            hint: 'Add',
+            w: 330,
+            onTap: () {
+              Navigator.pushNamed(context, AddEraView.routeName);
+            },
+            fillColor: const Color(0xFF614317),
+            borderColor: const Color(0xFFBC8729),
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          CustomButton(
+            hint: 'Update',
+            w: 330,
+            onTap: () {
+              // Navigator.pushNamed(context, AddEraView.routeName);
+            },
+            fillColor: const Color(0xFF614317),
+            borderColor: const Color(0xFFBC8729),
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          CustomButton(
+            hint: 'Delete',
+            w: 330,
+            onTap: () {
+              // Navigator.pushNamed(context, AddEraView.routeName);
+            },
+            fillColor: const Color(0xFF614317),
+            borderColor: const Color(0xFFBC8729),
+          ),
+        ],
+      ),
+    );
+  }
+}
