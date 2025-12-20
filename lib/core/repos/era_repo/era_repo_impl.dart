@@ -4,9 +4,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timelens_dashboard/core/errors/failures.dart';
 import 'package:timelens_dashboard/core/repos/era_repo/era_repo.dart';
 import 'package:timelens_dashboard/core/services/storage_service.dart';
-import 'package:timelens_dashboard/features/add_era/data/data_sources/supa_era_data_source.dart';
-import 'package:timelens_dashboard/features/add_era/data/models/era_model.dart';
-import 'package:timelens_dashboard/features/add_era/domain/entities/era_entity.dart';
+import 'package:timelens_dashboard/features/era_crud/data/data_sources/supa_era_data_source.dart';
+import 'package:timelens_dashboard/features/era_crud/data/models/era_model.dart';
+import 'package:timelens_dashboard/features/era_crud/domain/entities/era_entity.dart';
 
 class EraRepoImpl implements EraRepo {
   final StorageService storageService;

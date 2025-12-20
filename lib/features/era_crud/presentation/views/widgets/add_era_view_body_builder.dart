@@ -1,41 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:timelens_dashboard/features/add_era/presentation/cubit/add_era_cubit.dart';
-import 'package:timelens_dashboard/features/add_era/presentation/views/widgets/add_era_view_body.dart';
-import 'package:timelens_dashboard/features/add_era/presentation/views/widgets/state_snack_bar.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/cubit/add_era_cubit.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/views/widgets/add_era_view_body.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/views/widgets/state_snack_bar.dart';
 
 class AddEraViewBodyBuilder extends StatelessWidget {
   const AddEraViewBodyBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AddEraCubit, AddEraCubitState>(
-      listener: (BuildContext context, AddEraCubitState state) {
-        if (state is AddEraCubitFailure) {
+    return BlocConsumer<EraCubit, EraCubitState>(
+      listener: (BuildContext context, EraCubitState state) {
+        if (state is EraCubitFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildSnackBar(
               message: state.message,
               color: Colors.red,
             ),
           );
-        } else if (state is AddEraCubitSuccess) {
+        } else if (state is EraCubitSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildSnackBar(
               message: 'Era added successfully!',
               color: Colors.green,
             ),
           );
-          // call reset form 
+          // call reset form
           Future.delayed(const Duration(milliseconds: 1500), () {
-            context.read<AddEraCubit>().resetForm();
+            context.read<EraCubit>().resetForm();
           });
-
         }
       },
-      builder: (BuildContext context, AddEraCubitState state) {
+      builder: (BuildContext context, EraCubitState state) {
         return ModalProgressHUD(
-            inAsyncCall: state is AddEraCubitLoading,
+            inAsyncCall: state is EraCubitLoading,
             child: AddEraViewBody(state: state));
       },
     );

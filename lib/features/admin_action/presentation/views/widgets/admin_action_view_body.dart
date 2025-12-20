@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timelens_dashboard/core/enums/navigate_enums.dart';
-import 'package:timelens_dashboard/features/add_era/presentation/views/add_era_view.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/views/add_era_view.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
 

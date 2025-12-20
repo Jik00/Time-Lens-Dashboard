@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timelens_dashboard/core/enums/navigate_enums.dart';
-import 'package:timelens_dashboard/features/add_era/presentation/views/add_era_view.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/views/add_era_view.dart';
 import 'package:timelens_dashboard/features/admin_action/presentation/views/admin_action_view.dart';
 import 'package:timelens_dashboard/features/dashboard/presentation/views/dashboard_view.dart';
 

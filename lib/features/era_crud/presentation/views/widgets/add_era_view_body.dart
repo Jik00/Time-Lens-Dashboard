@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import 'package:timelens_dashboard/core/widgets/custom_form_text_field.dart';
 import 'package:timelens_dashboard/core/widgets/image_field.dart';
-import 'package:timelens_dashboard/features/add_era/domain/entities/era_entity.dart';
-import 'package:timelens_dashboard/features/add_era/presentation/cubit/add_era_cubit.dart';
+import 'package:timelens_dashboard/features/era_crud/domain/entities/era_entity.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/cubit/add_era_cubit.dart';
 
 class AddEraViewBody extends StatefulWidget {
-  final AddEraCubitState state;
+  final EraCubitState state;
   const AddEraViewBody({super.key, required this.state});
 
   @override
@@ -87,7 +87,7 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                         imageFile: eraImage!,
                       );
 
-                      context.read<AddEraCubit>().addEra(eraEntity);
+                      context.read<EraCubit>().addEra(eraEntity);
                     } else {
                       setState(() {
                         autoValidateMode = AutovalidateMode.always;
@@ -146,8 +146,7 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
   void didUpdateWidget(AddEraViewBody oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.state is AddEraCubitInitial &&
-        oldWidget.state is AddEraCubitSuccess) {
+    if (widget.state is EraCubitInitial && oldWidget.state is EraCubitSuccess) {
       clearForm();
     }
   }
