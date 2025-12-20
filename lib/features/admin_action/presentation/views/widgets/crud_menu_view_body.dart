@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timelens_dashboard/core/enums/navigate_enums.dart';
 import 'package:timelens_dashboard/features/era_crud/presentation/views/add_era_view.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/views/view_era_view.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
 
-class AdminActionViewBody extends StatelessWidget {
-  const AdminActionViewBody({super.key, required this.targetCategory});
+class CrudMenuViewBody extends StatelessWidget {
+  const CrudMenuViewBody({super.key, required this.targetCategory});
 
   final TargetCategory targetCategory;
 
@@ -66,7 +67,7 @@ class AdminActionViewBody extends StatelessWidget {
             hint: 'View',
             w: 330,
             onTap: () {
-              // Navigator.pushNamed(context, AddEraView.routeName);
+              Navigator.pushNamed(context, ViewEraView.routeName);
             },
             fillColor: const Color(0xFF614317),
             borderColor: const Color(0xFFBC8729),

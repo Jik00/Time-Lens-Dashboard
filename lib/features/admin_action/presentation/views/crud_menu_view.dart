@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:timelens_dashboard/core/enums/navigate_enums.dart';
 import 'package:timelens_dashboard/core/widgets/custom_appbar.dart';
 
-import 'widgets/admin_action_view_body.dart';
+import 'widgets/crud_menu_view_body.dart';
 
-class AdminActionView extends StatelessWidget {
-  const AdminActionView({super.key, required this.targetCategory});
+class CrudMenuView extends StatelessWidget {
+  const CrudMenuView({super.key, required this.targetCategory});
 
   static const routeName = 'adminAction';
 
@@ -16,7 +16,7 @@ class AdminActionView extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar('Manage ${targetCategory.name}s'),
       backgroundColor: const Color(0xFF1E1E1E),
-      body: AdminActionViewBody( targetCategory: targetCategory),
+      body: CrudMenuViewBody(targetCategory: targetCategory),
     );
   }
 }

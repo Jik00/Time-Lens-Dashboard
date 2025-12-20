@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import '../../../../../core/enums/navigate_enums.dart';
-import '../../../../admin_action/presentation/views/admin_action_view.dart';
+import '../../../../admin_action/presentation/views/crud_menu_view.dart';
 
 class DashboardViewBody extends StatelessWidget {
   const DashboardViewBody({super.key});
@@ -17,7 +17,8 @@ class DashboardViewBody extends StatelessWidget {
         children: [
           const Text(
             'What are we handling today ?',
-            style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600),
           ),
           SizedBox(
             height: 32.h,
@@ -28,7 +29,7 @@ class DashboardViewBody extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(
                 context,
-                AdminActionView.routeName,
+                CrudMenuView.routeName,
                 arguments: TargetCategory.era,
               );
             },
@@ -44,7 +45,7 @@ class DashboardViewBody extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(
                 context,
-                AdminActionView.routeName,
+                CrudMenuView.routeName,
                 arguments: TargetCategory.figure,
               );
             },
