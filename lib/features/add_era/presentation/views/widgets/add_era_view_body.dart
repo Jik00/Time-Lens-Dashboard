@@ -47,7 +47,7 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                 const SizedBox(height: 20),
                 CustomFormTextfield(
                   readOnly: false,
-                  hintText: 'Era Period',
+                  hintText: '(1100 - 1200)',
                   onSaved: (value) {
                     eraPeriod = value!;
                   },
