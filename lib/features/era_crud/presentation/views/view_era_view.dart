@@ -13,7 +13,7 @@ class ViewEraView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar('View Eras'),
+      appBar: buildAppBar('All Eras'),
       body: BlocProvider(
         create: (context) => getIt<EraCubit>(),
         child: const ViewEraViewBody(),
