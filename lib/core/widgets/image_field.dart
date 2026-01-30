@@ -100,7 +100,13 @@ class _CustomImageFieldState extends State<CustomImageField> {
       final ImagePicker picker = ImagePicker();
       final XFile? pickedFile =
           await picker.pickImage(source: ImageSource.gallery);
-      selectedImage = File(pickedFile!.path);
+      if (pickedFile == null) {
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      }
+      selectedImage = File(pickedFile.path);
       widget.onImageChanged(selectedImage!);
     } on Exception catch (e) {
       ScaffoldMessenger(child: SnackBar(content: Text(e.toString())));

@@ -117,17 +117,8 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
   }
 
   void _updateCode() {
-    if (!mounted) return; // <--- prevents using after dispose
     eraCodeController.text =
         eraNameController.text.toLowerCase().replaceAll(RegExp(r'\s+'), '_');
-  }
-
-  @override
-  void dispose() {
-    eraNameController.removeListener(_updateCode);
-    eraNameController.dispose();
-    eraCodeController.dispose();
-    super.dispose();
   }
 
   void clearForm() {
