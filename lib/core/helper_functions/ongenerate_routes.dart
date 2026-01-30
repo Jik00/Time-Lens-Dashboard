@@ -4,6 +4,7 @@ import 'package:timelens_dashboard/features/era_crud/presentation/views/add_era_
 import 'package:timelens_dashboard/features/admin_action/presentation/views/crud_menu_view.dart';
 import 'package:timelens_dashboard/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:timelens_dashboard/features/era_crud/presentation/views/view_era_view.dart';
+import 'package:timelens_dashboard/features/figure_crud/presentation/views/add_figure_view.dart';
 
 Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
@@ -32,6 +33,12 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
     case ViewEraView.routeName:
       return MaterialPageRoute(
         builder: (_) => const ViewEraView(),
+        settings: settings,
+      );
+
+    case AddFigureView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const AddFigureView(),
         settings: settings,
       );
 
