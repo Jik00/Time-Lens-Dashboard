@@ -12,10 +12,10 @@ import '../../../constants.dart';
 
 class EraRepoImpl implements EraRepo {
   final StorageService storageService;
-  final SupabaseEraDataSource dataSource;
+  final SupabaseEraDataSource supaEraDataSource;
 
   EraRepoImpl({
-    required this.dataSource,
+    required this.supaEraDataSource,
     required this.storageService,
   });
 
@@ -40,7 +40,7 @@ class EraRepoImpl implements EraRepo {
       );
 
       // convert entity to model then insert into Supa
-      await dataSource.insertEra(model.toMap());
+      await supaEraDataSource.insertEra(model.toMap());
 
       return const Right(null);
     } on StorageException catch (e) {

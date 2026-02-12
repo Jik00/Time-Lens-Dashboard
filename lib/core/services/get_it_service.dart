@@ -7,18 +7,26 @@ import 'package:timelens_dashboard/features/era_crud/data/data_sources/supa_era_
 import 'package:timelens_dashboard/features/era_crud/domain/usecases/add_era_usecase.dart';
 
 import '../../features/figure_crud/data/data_sources/supa_figure_data_source.dart';
+import '../repos/figure_repo/figure_repo.dart';
+import '../repos/figure_repo/figure_repo_impl.dart';
 
 final getIt = GetIt.instance;
 final supabase = Supabase.instance.client;
 
 void setupGetIt() {
   getIt.registerSingleton(SupabaseStorageService());
+
   getIt.registerSingleton(SupabaseEraDataSource(supabase));
   getIt.registerSingleton(SupabaseFigureDataSource(supabase));
+
   getIt.registerSingleton<EraRepo>(EraRepoImpl(
-    dataSource: getIt<SupabaseEraDataSource>(),
+    supaEraDataSource: getIt<SupabaseEraDataSource>(),
     storageService: getIt<SupabaseStorageService>(),
   ));
-  getIt.registerSingleton(AddEraUsecase(eraRepo: getIt<EraRepo>()));
+  getIt.registerSingleton<FigureRepo>(FigureRepoImpl(
+    supaFigureDataSource: getIt<SupabaseFigureDataSource>(),
+    storageService: getIt<SupabaseStorageService>(),
+  ));
 
+  getIt.registerSingleton(AddEraUsecase(eraRepo: getIt<EraRepo>()));
 }
