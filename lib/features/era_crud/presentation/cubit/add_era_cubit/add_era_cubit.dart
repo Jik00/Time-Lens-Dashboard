@@ -4,7 +4,7 @@ import 'package:timelens_dashboard/core/helper_functions/friendly_error_message.
 import 'package:timelens_dashboard/features/era_crud/domain/entities/era_entity.dart';
 import 'package:timelens_dashboard/features/era_crud/domain/usecases/add_era_usecase.dart';
 
-part 'add_era_cubit_state.dart';
+part 'add_era_state.dart';
 
 class EraCubit extends Cubit<EraCubitState> {
   EraCubit(this.addEraUsecase) : super(EraCubitInitial());
