@@ -5,8 +5,12 @@ import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import 'package:timelens_dashboard/core/widgets/custom_form_text_field.dart';
 import 'package:timelens_dashboard/core/widgets/image_field.dart';
 
+import '../../cubit/add_figure_cubit/add_figure_cubit.dart';
+
 class AddFigureViewBody extends StatefulWidget {
-  const AddFigureViewBody({super.key});
+  const AddFigureViewBody({super.key, required this.state});
+
+  final AddFigureState state;
 
   @override
   State<AddFigureViewBody> createState() => _AddFigureViewBodyState();
