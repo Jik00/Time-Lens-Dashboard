@@ -8,7 +8,7 @@ class SupabaseStorageService implements StorageService {
   final SupabaseClient _client = Supabase.instance.client;
 
   @override
-  Future<String> uploadFile(File file, String filePath) async {
+  Future<String> uploadFile({ required File file, required String filePath, required String bucketName}) async {
     try {
 
       if (!await file.exists()) {

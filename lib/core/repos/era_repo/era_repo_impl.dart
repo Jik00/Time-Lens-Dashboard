@@ -8,21 +8,25 @@ import 'package:timelens_dashboard/features/era_crud/data/data_sources/supa_era_
 import 'package:timelens_dashboard/features/era_crud/data/models/era_model.dart';
 import 'package:timelens_dashboard/features/era_crud/domain/entities/era_entity.dart';
 
+import '../../../constants.dart';
+
 class EraRepoImpl implements EraRepo {
   final StorageService storageService;
-  final SupabaseEraDataSource dataSource; 
+  final SupabaseEraDataSource dataSource;
 
-  EraRepoImpl({required this.dataSource, 
+  EraRepoImpl({
+    required this.dataSource,
     required this.storageService,
   });
 
   @override
   Future<Either<Failure, void>> addEra(EraEntity eraEntity) async {
     try {
-
       String imageUrl = await storageService.uploadFile(
-        eraEntity.imageFile,
-        eraEntity.eraCode, // saved inside by eraCode
+        file: eraEntity.imageFile,
+        filePath: eraEntity.eraCode,
+        bucketName: kSupaBucketForEras,
+        // saved inside by eraCode
       );
 
       // create EraModel with imageUrl
@@ -39,7 +43,6 @@ class EraRepoImpl implements EraRepo {
       await dataSource.insertEra(model.toMap());
 
       return const Right(null);
-
     } on StorageException catch (e) {
       return Left(StorageFailure('Failed to upload image: ${e.message}'));
     } on PostgrestException catch (e) {
