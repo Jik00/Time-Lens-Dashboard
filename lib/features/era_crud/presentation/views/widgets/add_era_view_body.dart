@@ -5,7 +5,7 @@ import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import 'package:timelens_dashboard/core/widgets/custom_form_text_field.dart';
 import 'package:timelens_dashboard/core/widgets/image_field.dart';
 import 'package:timelens_dashboard/features/era_crud/domain/entities/era_entity.dart';
-import 'package:timelens_dashboard/features/era_crud/presentation/cubit/add_era_cubit.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/cubit/add_era_cubit/add_era_cubit.dart';
 
 class AddEraViewBody extends StatefulWidget {
   final EraCubitState state;

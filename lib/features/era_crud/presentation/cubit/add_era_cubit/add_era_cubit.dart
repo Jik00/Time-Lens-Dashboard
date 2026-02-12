@@ -7,26 +7,26 @@ import 'package:timelens_dashboard/features/era_crud/domain/usecases/add_era_use
 part 'add_era_cubit_state.dart';
 
 class EraCubit extends Cubit<EraCubitState> {
-  EraCubit(this.addEraUsecase) : super(const EraCubitInitial());
+  EraCubit(this.addEraUsecase) : super(EraCubitInitial());
 
   final AddEraUsecase addEraUsecase;
 
   Future<void> addEra(EraEntity eraEntity) async {
-    emit(const EraCubitLoading());
+    emit(EraCubitLoading());
 
     var eraResult = await addEraUsecase(eraEntity);
     eraResult.fold(
       (failure) {
         final errorMessage = getUserFriendlyError(failure);
-        emit(EraCubitFailure(errorMessage));
+        emit(EraCubitFailure(message: errorMessage));
       },
       (_) {
-        emit(const EraCubitSuccess());
+        emit(EraCubitSuccess());
       },
     );
   }
 
   void resetForm() {
-    emit(const EraCubitInitial());
+    emit(EraCubitInitial());
   }
 }
