@@ -7,6 +7,7 @@ import 'package:timelens_dashboard/features/era_crud/data/data_sources/supa_era_
 import 'package:timelens_dashboard/features/era_crud/domain/usecases/add_era_usecase.dart';
 
 import '../../features/figure_crud/data/data_sources/supa_figure_data_source.dart';
+import '../../features/figure_crud/domain/usecases/add_figure_usecase.dart';
 import '../repos/figure_repo/figure_repo.dart';
 import '../repos/figure_repo/figure_repo_impl.dart';
 
@@ -29,4 +30,5 @@ void setupGetIt() {
   ));
 
   getIt.registerSingleton(AddEraUsecase(eraRepo: getIt<EraRepo>()));
+  getIt.registerSingleton(AddFigureUsecase(figureRepo: getIt<FigureRepo>()));
 }
