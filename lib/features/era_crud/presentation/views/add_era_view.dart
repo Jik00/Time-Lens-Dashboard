@@ -5,6 +5,8 @@ import 'package:timelens_dashboard/core/widgets/custom_appbar.dart';
 import 'package:timelens_dashboard/features/era_crud/presentation/cubit/add_era_cubit/add_era_cubit.dart';
 import 'package:timelens_dashboard/features/era_crud/presentation/views/widgets/add_era_view_body_builder.dart';
 
+import '../../domain/usecases/add_era_usecase.dart';
+
 class AddEraView extends StatelessWidget {
   const AddEraView({super.key});
 
@@ -15,7 +17,7 @@ class AddEraView extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar('Add Era'),
       body: BlocProvider(
-        create: (context) => getIt<EraCubit>(),
+        create: (context) => EraCubit(getIt<AddEraUsecase>()),
         child: const AddEraViewBodyBuilder(),
       ),
     );
