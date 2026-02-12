@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import 'package:timelens_dashboard/core/widgets/custom_form_text_field.dart';
 import 'package:timelens_dashboard/core/widgets/image_field.dart';
 
+import '../../../domain/entities/figure_entity.dart';
 import '../../cubit/add_figure_cubit/add_figure_cubit.dart';
 
 class AddFigureViewBody extends StatefulWidget {
@@ -90,14 +92,15 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
                         figureImage != null) {
                       addFigureFormKey.currentState!.save();
 
-                      // final eraEntity = EraEntity(
-                      //   eraName: eraName,
-                      //   eraCode: eraCode,
-                      //   eraPeriod: eraPeriod,
-                      //   imageFile: eraImage!,
-                      // );
+                      final figureEntity = FigureEntity(
+                        figureName: figureName,
+                        reignYears: reignYears,
+                        reignPeriod: reignPeriod,
+                        figureCode: figureCode,
+                        imageFile: figureImage!,
+                      );
 
-                      // context.read<EraCubit>().addEra(eraEntity);
+                      context.read<AddFigureCubit>().addFigure(figureEntity);
                     } else {
                       setState(() {
                         autoValidateMode = AutovalidateMode.always;
@@ -144,12 +147,13 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
     });
   }
 
-  // @override
-  // void didUpdateWidget(AddFigureViewBody oldWidget) {
-  //   super.didUpdateWidget(oldWidget);
+  @override
+  void didUpdateWidget(AddFigureViewBody oldWidget) {
+    super.didUpdateWidget(oldWidget);
 
-  //   if (widget.state is EraCubitInitial && oldWidget.state is EraCubitSuccess) {
-  //     clearForm();
-  //   }
-  // }
+    if (widget.state is AddFigureInitial &&
+        oldWidget.state is AddFigureSuccess) {
+      clearForm();
+    }
+  }
 }
