@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timelens_dashboard/constants.dart';
 
-class SupabaseEraDataSource {
+class SupabaseFigureDataSource {
   final SupabaseClient supabase;
 
-  SupabaseEraDataSource(this.supabase);
+  SupabaseFigureDataSource(this.supabase);
 
-  Future<void> insertEra(Map<String, dynamic> data) async {
+  Future<void> insertFigure(Map<String, dynamic> data) async {
     try {
       log (data.toString());
       await supabase.from(kSupaFiguresTable).insert(data);

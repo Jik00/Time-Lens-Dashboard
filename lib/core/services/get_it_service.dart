@@ -6,12 +6,15 @@ import 'package:timelens_dashboard/core/services/supabase_storage_service.dart';
 import 'package:timelens_dashboard/features/era_crud/data/data_sources/supa_era_data_source.dart';
 import 'package:timelens_dashboard/features/era_crud/domain/usecases/add_era_usecase.dart';
 
+import '../../features/figure_crud/data/data_sources/supa_figure_data_source.dart';
+
 final getIt = GetIt.instance;
 final supabase = Supabase.instance.client;
 
 void setupGetIt() {
   getIt.registerSingleton(SupabaseStorageService());
   getIt.registerSingleton(SupabaseEraDataSource(supabase));
+  getIt.registerSingleton(SupabaseFigureDataSource(supabase));
   getIt.registerSingleton<EraRepo>(EraRepoImpl(
     dataSource: getIt<SupabaseEraDataSource>(),
     storageService: getIt<SupabaseStorageService>(),
