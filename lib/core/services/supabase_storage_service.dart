@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:timelens_dashboard/constants.dart';
 import 'package:timelens_dashboard/core/services/storage_service.dart';
 import 'package:path/path.dart' as p;
 
@@ -19,7 +18,7 @@ class SupabaseStorageService implements StorageService {
       final fullPath = "$filePath/$fileName";
 
       // Upload the file
-      final uploadResult = await _client.storage.from(kSupaBucketForEras).upload(fullPath, file);
+      final uploadResult = await _client.storage.from(bucketName).upload(fullPath, file, fileOptions: const FileOptions(upsert: true),);
       
       // Check if upload was successful
       if (uploadResult.isEmpty) {
@@ -27,7 +26,7 @@ class SupabaseStorageService implements StorageService {
       }
 
       final publicUrl =
-          _client.storage.from(kSupaBucketForEras).getPublicUrl(fullPath);
+          _client.storage.from(bucketName).getPublicUrl(fullPath);
 
       return publicUrl;
     } catch (e) {

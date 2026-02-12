@@ -53,7 +53,7 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
                   readOnly: false,
                   hintText: 'Reign Years ~ 66',
                   onSaved: (value) {
-                    figureName = value!;
+                    reignYears = value!;
                   },
                 ),
                 const SizedBox(height: 20),

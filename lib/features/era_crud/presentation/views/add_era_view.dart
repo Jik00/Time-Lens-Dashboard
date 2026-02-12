@@ -17,7 +17,7 @@ class AddEraView extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar('Add Era'),
       body: BlocProvider(
-        create: (context) => EraCubit(getIt<AddEraUsecase>()),
+        create: (context) => EraCubit( getIt<AddEraUsecase>()),
         child: const AddEraViewBodyBuilder(),
       ),
     );
