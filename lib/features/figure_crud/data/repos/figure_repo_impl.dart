@@ -2,13 +2,13 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timelens_dashboard/core/errors/failures.dart';
-import 'package:timelens_dashboard/core/repos/figure_repo/figure_repo.dart';
+import 'package:timelens_dashboard/features/figure_crud/domain/repos/figure_repo.dart';
 import 'package:timelens_dashboard/core/services/storage_service.dart';
 import 'package:timelens_dashboard/core/services/supabase_data_service.dart';
 import 'package:timelens_dashboard/features/figure_crud/domain/entities/figure_entity.dart';
 
-import '../../../constants.dart';
-import '../../../features/figure_crud/data/models/figure_model.dart';
+import '../../../../constants.dart';
+import '../models/figure_model.dart';
 
 class FigureRepoImpl implements FigureRepo {
   final StorageService storageService;
