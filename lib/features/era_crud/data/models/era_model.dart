@@ -1,10 +1,8 @@
-import 'dart:io';
-
 class EraModel {
   final String eraName;
   final String eraPeriod;
   final String eraCode;
-  final File imageFile;
+//  final File imageFile;
   final String imageUrl;
   final DateTime? createdAt;
 
@@ -12,7 +10,7 @@ class EraModel {
     required this.eraName,
     required this.eraPeriod,
     required this.eraCode,
-    required this.imageFile,
+   // required this.imageFile,
     required this.imageUrl,
     this.createdAt,
   });
@@ -25,5 +23,15 @@ class EraModel {
       'image_url': imageUrl,
       'created_at': createdAt?.toIso8601String() ?? DateTime.now().toIso8601String(),
     };
+  }
+
+  factory EraModel.fromMap(Map<String, dynamic> map) {
+    return EraModel(
+      eraName: map['era_name'] ?? '',
+      eraPeriod: map['era_period'] ?? '',
+      eraCode: map['era_code'] ?? '',
+      imageUrl: map['image_url'] ?? '',
+      createdAt: map['created_at'] != null ? DateTime.parse(map['created_at']) : null,
+    );
   }
 }

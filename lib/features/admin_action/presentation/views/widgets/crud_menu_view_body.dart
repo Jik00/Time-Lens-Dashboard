@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timelens_dashboard/core/enums/navigate_enums.dart';
 import 'package:timelens_dashboard/features/era_crud/presentation/views/add_era_view.dart';
-import 'package:timelens_dashboard/features/era_crud/presentation/views/view_era_view.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/views/get_era_view.dart';
 import 'package:timelens_dashboard/features/figure_crud/presentation/views/add_figure_view.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
@@ -34,7 +34,7 @@ class CrudMenuViewBody extends StatelessWidget {
             onTap: () {
               if (targetCategory == TargetCategory.era) {
                 Navigator.pushNamed(context, AddEraView.routeName);
-              }else{
+              } else {
                 Navigator.pushNamed(context, AddFigureView.routeName);
               }
             },
@@ -72,7 +72,7 @@ class CrudMenuViewBody extends StatelessWidget {
             hint: 'View',
             w: 330,
             onTap: () {
-              Navigator.pushNamed(context, ViewEraView.routeName);
+              Navigator.pushNamed(context, GetEraView.routeName);
             },
             fillColor: const Color(0xFF614317),
             borderColor: const Color(0xFFBC8729),

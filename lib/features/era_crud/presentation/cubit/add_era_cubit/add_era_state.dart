@@ -1,16 +1,16 @@
 part of 'add_era_cubit.dart';
 
 @immutable
-sealed class EraCubitState {}
+sealed class AddEraCubitState {}
 
-class EraCubitInitial extends EraCubitState {}
+class AddEraCubitInitial extends AddEraCubitState {}
 
-class EraCubitLoading extends EraCubitState {}
+class AddEraCubitLoading extends AddEraCubitState {}
 
-class EraCubitSuccess extends EraCubitState {}
+class EraCubitSuccess extends AddEraCubitState {}
 
-class EraCubitFailure extends EraCubitState {
+class AddEraCubitFailure extends AddEraCubitState {
   final String message;
 
-  EraCubitFailure({required this.message});
+  AddEraCubitFailure({required this.message});
 }

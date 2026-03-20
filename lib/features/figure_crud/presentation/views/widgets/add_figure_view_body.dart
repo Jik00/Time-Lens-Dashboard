@@ -21,7 +21,7 @@ class AddFigureViewBody extends StatefulWidget {
 final GlobalKey<FormState> addFigureFormKey = GlobalKey<FormState>();
 AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
-late String figureName, reignYears, reignPeriod, figureCode;
+late String figureName, dynasty, reignPeriod, figureCode;
 File? figureImage;
 
 final TextEditingController figureNameController = TextEditingController();
@@ -51,9 +51,9 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
                 const SizedBox(height: 20),
                 CustomFormTextfield(
                   readOnly: false,
-                  hintText: 'Reign Years ~ 66',
+                  hintText: 'Dynasty ~ 18',
                   onSaved: (value) {
-                    reignYears = value!;
+                    dynasty = value!;
                   },
                 ),
                 const SizedBox(height: 20),
@@ -94,7 +94,7 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
 
                       final figureEntity = FigureEntity(
                         figureName: figureName,
-                        reignYears: reignYears,
+                        dynasty: dynasty,
                         reignPeriod: reignPeriod,
                         figureCode: figureCode,
                         imageFile: figureImage!,
@@ -142,7 +142,7 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
       figureName = '';
       figureCode = '';
       reignPeriod = '';
-      reignYears = '';
+      dynasty = '';
       autoValidateMode = AutovalidateMode.disabled;
     });
   }

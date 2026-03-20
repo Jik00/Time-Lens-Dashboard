@@ -1,45 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:timelens_dashboard/features/era_crud/domain/entities/era_entity.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/views/widgets/add_era_view_body.dart';
 
 class ExpansionTileItem extends StatelessWidget {
-  const ExpansionTileItem({super.key});
+  const ExpansionTileItem({super.key, required this.era});
+
+  final EraEntity era;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.only(bottom: 12.h),
       child: ExpansionTile(
-        title: const Text(
-          'Era Title',
+        title: Text(
+          eraName,
           style: TextStyle(
-              color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+              color: Colors.white,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600),
         ),
         iconColor: Colors.white,
         collapsedIconColor: const Color(0xFFBC8729),
         backgroundColor: const Color(0xFF614317),
-        collapsedShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
+        collapsedShape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.r)),
             side: BorderSide(color: Color(0xFF614317))),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8))),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.r))),
         children: [
           Container(
-            height: 150,
+            height: 150.h,
             clipBehavior: Clip.antiAlias,
             margin: const EdgeInsets.all(10),
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.white),
-              image: const DecorationImage(
+              image: DecorationImage(
                 image: NetworkImage(
-                    'https://bgiyysstohukhiztkyju.supabase.co/storage/v1/object/public/eras/the_new_kingdom/the_new_kingdom.png'),
+                  era.imgUrl!,
+                ),
                 fit: BoxFit.cover,
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              borderRadius: BorderRadius.all(Radius.circular(8.r)),
             ),
           ),
-          const Text(
-            '( 1100 - 1200 )',
+          Text(
+            era.eraPeriod,
             style: TextStyle(color: Colors.white),
           ),
           SizedBox(height: 8.h),

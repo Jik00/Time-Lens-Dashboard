@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timelens_dashboard/core/errors/failures.dart';
 import 'package:timelens_dashboard/features/figure_crud/domain/repos/figure_repo.dart';
 import 'package:timelens_dashboard/core/services/storage_service.dart';
-import 'package:timelens_dashboard/core/services/supabase_data_service.dart';
+import 'package:timelens_dashboard/core/data_source/supabase_data_source.dart';
 import 'package:timelens_dashboard/features/figure_crud/domain/entities/figure_entity.dart';
 
 import '../../../../constants.dart';
@@ -12,7 +12,7 @@ import '../models/figure_model.dart';
 
 class FigureRepoImpl implements FigureRepo {
   final StorageService storageService;
-  final SupabaseDataService supaDatabaseService;
+  final SupabaseDataSource supaDatabaseService;
 
   FigureRepoImpl({
     required this.storageService,
@@ -33,7 +33,7 @@ class FigureRepoImpl implements FigureRepo {
       final model = FigureModel(
         figureName: figureEntity.figureName,
         reignPeriod: figureEntity.reignPeriod,
-        reignYears: figureEntity.reignYears,
+        dynasty: figureEntity.dynasty,
         figureCode: figureEntity.figureCode,
         imageFile: figureEntity.imageFile,
         imageUrl: imageUrl,

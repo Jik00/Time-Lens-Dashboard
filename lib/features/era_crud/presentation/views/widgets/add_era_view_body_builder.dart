@@ -10,9 +10,9 @@ class AddEraViewBodyBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<EraCubit, EraCubitState>(
-      listener: (BuildContext context, EraCubitState state) {
-        if (state is EraCubitFailure) {
+    return BlocConsumer<AddEraCubit, AddEraCubitState>(
+      listener: (BuildContext context, AddEraCubitState state) {
+        if (state is AddEraCubitFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildSnackBar(
               message: state.message,
@@ -28,13 +28,13 @@ class AddEraViewBodyBuilder extends StatelessWidget {
           );
           // call reset form
           Future.delayed(const Duration(milliseconds: 1500), () {
-            context.read<EraCubit>().resetForm();
+            context.read<AddEraCubit>().resetForm();
           });
         }
       },
-      builder: (BuildContext context, EraCubitState state) {
+      builder: (BuildContext context, AddEraCubitState state) {
         return ModalProgressHUD(
-            inAsyncCall: state is EraCubitLoading,
+            inAsyncCall: state is AddEraCubitLoading,
             child: AddEraViewBody(state: state));
       },
     );

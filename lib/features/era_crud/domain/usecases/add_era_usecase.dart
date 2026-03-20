@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:timelens_dashboard/core/errors/failures.dart';
 import 'package:timelens_dashboard/features/era_crud/domain/repos/era_repo.dart';
@@ -7,5 +9,6 @@ class AddEraUsecase {
   final EraRepo eraRepo;
   AddEraUsecase({required this.eraRepo});
 
-  Future<Either<Failure, void>> call(EraEntity eraEntity) => eraRepo.addEra(eraEntity);
+  Future<Either<Failure, void>> call(EraEntity eraEntity, File imgFile) =>
+      eraRepo.addEra(era: eraEntity, imgFile: imgFile);
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timelens_dashboard/core/helper_functions/friendly_error_message.dart';
@@ -6,19 +8,20 @@ import 'package:timelens_dashboard/features/era_crud/domain/usecases/add_era_use
 
 part 'add_era_state.dart';
 
-class EraCubit extends Cubit<EraCubitState> {
-  EraCubit(this.addEraUsecase) : super(EraCubitInitial());
+class AddEraCubit extends Cubit<AddEraCubitState> {
+  AddEraCubit({ required this.addEraUsecase}) : super(AddEraCubitInitial());
 
   final AddEraUsecase addEraUsecase;
 
-  Future<void> addEra(EraEntity eraEntity) async {
-    emit(EraCubitLoading());
+  Future<void> addEra(
+      {required EraEntity eraEntity, required File imgFile}) async {
+    emit(AddEraCubitLoading());
 
-    var eraResult = await addEraUsecase(eraEntity);
+    var eraResult = await addEraUsecase.call(eraEntity, imgFile);
     eraResult.fold(
       (failure) {
         final errorMessage = getUserFriendlyError(failure);
-        emit(EraCubitFailure(message: errorMessage));
+        emit(AddEraCubitFailure(message: errorMessage));
       },
       (_) {
         emit(EraCubitSuccess());
@@ -27,6 +30,6 @@ class EraCubit extends Cubit<EraCubitState> {
   }
 
   void resetForm() {
-    emit(EraCubitInitial());
+    emit(AddEraCubitInitial());
   }
 }

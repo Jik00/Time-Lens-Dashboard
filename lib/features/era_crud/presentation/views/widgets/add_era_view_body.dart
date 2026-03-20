@@ -8,7 +8,7 @@ import 'package:timelens_dashboard/features/era_crud/domain/entities/era_entity.
 import 'package:timelens_dashboard/features/era_crud/presentation/cubit/add_era_cubit/add_era_cubit.dart';
 
 class AddEraViewBody extends StatefulWidget {
-  final EraCubitState state;
+  final AddEraCubitState state;
   const AddEraViewBody({super.key, required this.state});
 
   @override
@@ -81,13 +81,13 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                       addEraFormKey.currentState!.save();
 
                       final eraEntity = EraEntity(
-                        eraName: eraName,
-                        eraCode: eraCode,
-                        eraPeriod: eraPeriod,
-                        imageFile: eraImage!,
-                      );
+                          eraName: eraName,
+                          eraCode: eraCode,
+                          eraPeriod: eraPeriod);
 
-                      context.read<EraCubit>().addEra(eraEntity);
+                      context
+                          .read<AddEraCubit>()
+                          .addEra(eraEntity: eraEntity, imgFile: eraImage!);
                     } else {
                       setState(() {
                         autoValidateMode = AutovalidateMode.always;
@@ -137,7 +137,8 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
   void didUpdateWidget(AddEraViewBody oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.state is EraCubitInitial && oldWidget.state is EraCubitSuccess) {
+    if (widget.state is AddEraCubitInitial &&
+        oldWidget.state is EraCubitSuccess) {
       clearForm();
     }
   }

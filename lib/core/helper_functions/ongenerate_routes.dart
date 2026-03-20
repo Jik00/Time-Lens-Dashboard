@@ -3,7 +3,7 @@ import 'package:timelens_dashboard/core/enums/navigate_enums.dart';
 import 'package:timelens_dashboard/features/era_crud/presentation/views/add_era_view.dart';
 import 'package:timelens_dashboard/features/admin_action/presentation/views/crud_menu_view.dart';
 import 'package:timelens_dashboard/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:timelens_dashboard/features/era_crud/presentation/views/view_era_view.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/views/get_era_view.dart';
 import 'package:timelens_dashboard/features/figure_crud/presentation/views/add_figure_view.dart';
 
 Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
@@ -30,9 +30,9 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
         settings: settings,
       );
 
-    case ViewEraView.routeName:
+    case GetEraView.routeName:
       return MaterialPageRoute(
-        builder: (_) => const ViewEraView(),
+        builder: (_) => const GetEraView(),
         settings: settings,
       );
 

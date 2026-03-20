@@ -3,7 +3,7 @@ import 'dart:io';
 class FigureModel {
   final String figureName;
   final String reignPeriod;
-  final String reignYears;
+  final String dynasty;
   // final String belongEra;
   final String figureCode;
   final File imageFile;
@@ -13,7 +13,7 @@ class FigureModel {
   FigureModel({
     required this.figureName,
     required this.reignPeriod,
-    required this.reignYears,
+    required this.dynasty,
     required this.figureCode,
     required this.imageFile,
     required this.imageUrl,
@@ -24,10 +24,11 @@ class FigureModel {
     return {
       'figure_name': figureName,
       'reign_period': reignPeriod,
-      'reign_years': reignYears,
+      'dynasty': dynasty,
       'figure_code': figureCode,
       'image_url': imageUrl,
-      'created_at': createdAt?.toIso8601String() ?? DateTime.now().toIso8601String(),
+      'created_at':
+          createdAt?.toIso8601String() ?? DateTime.now().toIso8601String(),
     };
   }
 }
