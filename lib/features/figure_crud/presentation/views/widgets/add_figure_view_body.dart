@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import 'package:timelens_dashboard/core/widgets/custom_form_text_field.dart';
 import 'package:timelens_dashboard/core/widgets/image_field.dart';
@@ -27,6 +28,7 @@ File? figureImage;
 
 final TextEditingController figureNameController = TextEditingController();
 final TextEditingController figureCodeController = TextEditingController();
+final TextEditingController belongEraController = TextEditingController();
 
 class _AddFigureViewBodyState extends State<AddFigureViewBody> {
   @override
@@ -36,7 +38,7 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
         key: addFigureFormKey,
         autovalidateMode: autoValidateMode,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
           child: Column(
             children: [
               CustomFormTextfield(
@@ -47,7 +49,7 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
                   figureName = value!;
                 },
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 24.h),
               CustomFormTextfield(
                 readOnly: false,
                 hintText: 'Dynasty ~ 18',
@@ -55,7 +57,7 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
                   dynasty = value!;
                 },
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 24.h),
               CustomFormTextfield(
                 readOnly: false,
                 hintText: '(Reign Period ~ (1100 - 1200)',
@@ -63,7 +65,7 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
                   reignPeriod = value!;
                 },
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 24.h),
               CustomFormTextfield(
                 controller: figureCodeController,
                 readOnly: true,
@@ -72,9 +74,11 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
                   figureCode = value!;
                 },
               ),
-              const SizedBox(height: 20),
-              const SelectErasBlocBuilder(),
-              const SizedBox(height: 20),
+              SizedBox(height: 24.h),
+              SelectErasBlocBuilder(
+                belongEracontroller: belongEraController,
+              ),
+              SizedBox(height: 24.h),
               CustomImageField(
                 width: double.infinity,
                 height: 200,
@@ -90,7 +94,8 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
                 fillColor: const Color(0xFF614317),
                 onTap: () async {
                   if (addFigureFormKey.currentState!.validate() &&
-                      figureImage != null) {
+                      figureImage != null &&
+                      belongEraController.text.isNotEmpty) {
                     addFigureFormKey.currentState!.save();
 
                     final figureEntity = FigureEntity(
@@ -98,6 +103,7 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
                       dynasty: dynasty,
                       reignPeriod: reignPeriod,
                       figureCode: figureCode,
+                      belongEra: belongEraController.text,
                       imageFile: figureImage!,
                     );
 
@@ -138,6 +144,7 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
     addFigureFormKey.currentState?.reset();
     figureNameController.clear();
     figureCodeController.clear();
+    belongEraController.clear();
     setState(() {
       figureName = '';
       figureCode = '';

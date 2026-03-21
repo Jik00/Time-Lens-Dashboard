@@ -3,10 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timelens_dashboard/features/era_crud/domain/entities/era_entity.dart';
 
 class ErasExpansionTile extends StatefulWidget {
-  const ErasExpansionTile({super.key, required this.eras, this.onTap});
+  const ErasExpansionTile(
+      {super.key,
+      this.onTap,
+      required this.belongEraController,
+      required this.eras});
 
   final List<EraEntity> eras;
   final void Function()? onTap;
+  final TextEditingController belongEraController;
 
   @override
   State<ErasExpansionTile> createState() => _ErasExpansionTileState();
@@ -25,7 +30,9 @@ class _ErasExpansionTileState extends State<ErasExpansionTile> {
       child: ExpansionTile(
         controller: expandController,
         title: Text(
-          eraNameController.text,
+          (widget.belongEraController.text.isEmpty)
+              ? 'Select the belonged era'
+              : eraNameController.text,
           style: TextStyle(
             fontSize: 16.sp,
             color: Colors.white,
@@ -51,6 +58,7 @@ class _ErasExpansionTileState extends State<ErasExpansionTile> {
                 setState(() {
                   eraNameController.text = widget.eras[index].eraName;
                   expandController.collapse();
+                  widget.belongEraController.text = widget.eras[index].eraCode;
                 });
               },
               child: Container(

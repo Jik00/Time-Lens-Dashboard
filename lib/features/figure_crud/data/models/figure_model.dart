@@ -4,7 +4,7 @@ class FigureModel {
   final String figureName;
   final String reignPeriod;
   final String dynasty;
-  // final String belongEra;
+  final String belongEra;
   final String figureCode;
   final File imageFile;
   final String imageUrl;
@@ -14,6 +14,7 @@ class FigureModel {
     required this.figureName,
     required this.reignPeriod,
     required this.dynasty,
+    required this.belongEra,
     required this.figureCode,
     required this.imageFile,
     required this.imageUrl,
@@ -25,6 +26,7 @@ class FigureModel {
       'figure_name': figureName,
       'reign_period': reignPeriod,
       'dynasty': dynasty,
+      'belong_era': belongEra,
       'figure_code': figureCode,
       'image_url': imageUrl,
       'created_at':

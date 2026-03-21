@@ -34,6 +34,7 @@ class FigureRepoImpl implements FigureRepo {
         figureName: figureEntity.figureName,
         reignPeriod: figureEntity.reignPeriod,
         dynasty: figureEntity.dynasty,
+        belongEra: figureEntity.belongEra,
         figureCode: figureEntity.figureCode,
         imageFile: figureEntity.imageFile,
         imageUrl: imageUrl,

@@ -5,6 +5,7 @@ class FigureEntity {
   final String dynasty;
   final String reignPeriod;
   final String figureCode;
+  final String belongEra;
   final File imageFile;
 
   FigureEntity({
@@ -12,6 +13,7 @@ class FigureEntity {
     required this.dynasty,
     required this.reignPeriod,
     required this.figureCode,
+    required this.belongEra,
     required this.imageFile,
   });
 }
