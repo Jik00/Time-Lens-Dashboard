@@ -4,7 +4,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:timelens_dashboard/features/figure_crud/presentation/cubit/add_figure_cubit/add_figure_cubit.dart';
 import 'package:timelens_dashboard/features/figure_crud/presentation/views/widgets/add_figure_view_body.dart';
 
-import '../../../../era_crud/presentation/views/widgets/state_snack_bar.dart';
+import '../../../../../core/widgets/build_snack_bar.dart';
 
 class AddFigureViewBodyBuilder extends StatelessWidget {
   const AddFigureViewBodyBuilder({super.key});
@@ -29,7 +29,9 @@ class AddFigureViewBodyBuilder extends StatelessWidget {
           );
           // call reset form
           Future.delayed(const Duration(milliseconds: 1500), () {
-            context.read<AddFigureCubit>().resetForm();
+            if (context.mounted) {
+              context.read<AddFigureCubit>().resetForm();
+            }
           });
         }
       },

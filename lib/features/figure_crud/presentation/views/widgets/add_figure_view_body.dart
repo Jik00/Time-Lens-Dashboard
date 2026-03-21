@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import 'package:timelens_dashboard/core/widgets/custom_form_text_field.dart';
 import 'package:timelens_dashboard/core/widgets/image_field.dart';
+import 'package:timelens_dashboard/features/figure_crud/presentation/views/widgets/select_eras_bloc_builder.dart';
 
 import '../../../domain/entities/figure_entity.dart';
 import '../../cubit/add_figure_cubit/add_figure_cubit.dart';
@@ -36,86 +37,85 @@ class _AddFigureViewBodyState extends State<AddFigureViewBody> {
         autovalidateMode: autoValidateMode,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              children: [
-                CustomFormTextfield(
-                  controller: figureNameController,
-                  readOnly: false,
-                  hintText: 'Figure Name',
-                  onSaved: (value) {
-                    figureName = value!;
-                  },
-                ),
-                const SizedBox(height: 20),
-                CustomFormTextfield(
-                  readOnly: false,
-                  hintText: 'Dynasty ~ 18',
-                  onSaved: (value) {
-                    dynasty = value!;
-                  },
-                ),
-                const SizedBox(height: 20),
-                CustomFormTextfield(
-                  readOnly: false,
-                  hintText: '(Reign Period ~ (1100 - 1200)',
-                  onSaved: (value) {
-                    reignPeriod = value!;
-                  },
-                ),
-                const SizedBox(height: 20),
-                CustomFormTextfield(
-                  controller: figureCodeController,
-                  readOnly: true,
-                  hintText: 'Figure Code',
-                  onSaved: (value) {
-                    figureCode = value!;
-                  },
-                ),
-                const SizedBox(height: 20),
-                CustomImageField(
-                  width: double.infinity,
-                  height: 200,
-                  onImageChanged: (value) {
-                    figureImage = value;
-                  },
-                ),
-                const SizedBox(height: 40),
-                CustomButton(
-                  hint: 'Add Figure',
-                  w: 330,
-                  borderColor: const Color(0xFFBC8729),
-                  fillColor: const Color(0xFF614317),
-                  onTap: () async {
-                    if (addFigureFormKey.currentState!.validate() &&
-                        figureImage != null) {
-                      addFigureFormKey.currentState!.save();
+          child: Column(
+            children: [
+              CustomFormTextfield(
+                controller: figureNameController,
+                readOnly: false,
+                hintText: 'Figure Name',
+                onSaved: (value) {
+                  figureName = value!;
+                },
+              ),
+              const SizedBox(height: 20),
+              CustomFormTextfield(
+                readOnly: false,
+                hintText: 'Dynasty ~ 18',
+                onSaved: (value) {
+                  dynasty = value!;
+                },
+              ),
+              const SizedBox(height: 20),
+              CustomFormTextfield(
+                readOnly: false,
+                hintText: '(Reign Period ~ (1100 - 1200)',
+                onSaved: (value) {
+                  reignPeriod = value!;
+                },
+              ),
+              const SizedBox(height: 20),
+              CustomFormTextfield(
+                controller: figureCodeController,
+                readOnly: true,
+                hintText: 'Figure Code',
+                onSaved: (value) {
+                  figureCode = value!;
+                },
+              ),
+              const SizedBox(height: 20),
+              const SelectErasBlocBuilder(),
+              const SizedBox(height: 20),
+              CustomImageField(
+                width: double.infinity,
+                height: 200,
+                onImageChanged: (value) {
+                  figureImage = value;
+                },
+              ),
+              const SizedBox(height: 40),
+              CustomButton(
+                hint: 'Add Figure',
+                w: 330,
+                borderColor: const Color(0xFFBC8729),
+                fillColor: const Color(0xFF614317),
+                onTap: () async {
+                  if (addFigureFormKey.currentState!.validate() &&
+                      figureImage != null) {
+                    addFigureFormKey.currentState!.save();
 
-                      final figureEntity = FigureEntity(
-                        figureName: figureName,
-                        dynasty: dynasty,
-                        reignPeriod: reignPeriod,
-                        figureCode: figureCode,
-                        imageFile: figureImage!,
+                    final figureEntity = FigureEntity(
+                      figureName: figureName,
+                      dynasty: dynasty,
+                      reignPeriod: reignPeriod,
+                      figureCode: figureCode,
+                      imageFile: figureImage!,
+                    );
+
+                    context.read<AddFigureCubit>().addFigure(figureEntity);
+                  } else {
+                    setState(() {
+                      autoValidateMode = AutovalidateMode.always;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please pick all the fields!'),
+                          backgroundColor: Colors.red,
+                        ),
                       );
-
-                      context.read<AddFigureCubit>().addFigure(figureEntity);
-                    } else {
-                      setState(() {
-                        autoValidateMode = AutovalidateMode.always;
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please pick all the fields!'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      });
-                    }
-                  },
-                )
-              ],
-            ),
+                    });
+                  }
+                },
+              )
+            ],
           ),
         ),
       ),

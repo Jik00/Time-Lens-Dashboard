@@ -16,8 +16,9 @@ class GetEraView extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar('All Eras'),
       body: BlocProvider(
-        create: (context) =>
-            GetErasListCubit(getErasUsecase: getIt<GetErasUsecase>()),
+        create: (context) => GetErasListCubit(
+          getErasUsecase: getIt<GetErasUsecase>(),
+        )..getErasList(),
         child: const GetErasViewBlocBuilder(),
       ),
     );

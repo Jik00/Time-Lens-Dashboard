@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timelens_dashboard/core/widgets/custom_button.dart';
 import 'package:timelens_dashboard/core/widgets/custom_form_text_field.dart';
 import 'package:timelens_dashboard/core/widgets/image_field.dart';
@@ -31,7 +32,7 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
         key: addEraFormKey,
         autovalidateMode: autoValidateMode,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: SizedBox(
             width: double.infinity,
             child: Column(
@@ -44,7 +45,7 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                     eraName = value!;
                   },
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 CustomFormTextfield(
                   readOnly: false,
                   hintText: '(1100 - 1200)',
@@ -52,7 +53,7 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                     eraPeriod = value!;
                   },
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 CustomFormTextfield(
                   controller: eraCodeController,
                   readOnly: true,
@@ -61,7 +62,7 @@ class _AddEraViewBodyState extends State<AddEraViewBody> {
                     eraCode = value!;
                   },
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 CustomImageField(
                   width: double.infinity,
                   height: 200,

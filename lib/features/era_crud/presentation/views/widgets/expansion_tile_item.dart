@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timelens_dashboard/features/era_crud/domain/entities/era_entity.dart';
-import 'package:timelens_dashboard/features/era_crud/presentation/views/widgets/add_era_view_body.dart';
 
 class ExpansionTileItem extends StatelessWidget {
   const ExpansionTileItem({super.key, required this.era});
@@ -14,7 +13,7 @@ class ExpansionTileItem extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 12.h),
       child: ExpansionTile(
         title: Text(
-          eraName,
+          era.eraName,
           style: TextStyle(
               color: Colors.white,
               fontSize: 16.sp,
@@ -25,7 +24,7 @@ class ExpansionTileItem extends StatelessWidget {
         backgroundColor: const Color(0xFF614317),
         collapsedShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.r)),
-            side: BorderSide(color: Color(0xFF614317))),
+            side: BorderSide(color: Color(0xFF614317), width: 2.w)),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.r))),
         children: [

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timelens_dashboard/core/widgets/custom_appbar.dart';
+import 'package:timelens_dashboard/features/era_crud/domain/usecases/get_eras_usecase.dart';
+import 'package:timelens_dashboard/features/era_crud/presentation/cubit/get_eras_cubit/get_eras_list_cubit.dart';
 import 'package:timelens_dashboard/features/figure_crud/presentation/cubit/add_figure_cubit/add_figure_cubit.dart';
 import 'package:timelens_dashboard/features/figure_crud/presentation/views/widgets/add_figure_view_body_builder.dart';
 
@@ -16,8 +18,17 @@ class AddFigureView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar('Add Historical Figure'),
-      body: BlocProvider(
-        create: (context) => AddFigureCubit(getIt<AddFigureUsecase>()),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AddFigureCubit(getIt<AddFigureUsecase>()),
+          ),
+          BlocProvider(
+            create: (context) => GetErasListCubit(
+              getErasUsecase: getIt<GetErasUsecase>(),
+            )..getErasList(),
+          ),
+        ],
         child: const AddFigureViewBodyBuilder(),
       ),
     );

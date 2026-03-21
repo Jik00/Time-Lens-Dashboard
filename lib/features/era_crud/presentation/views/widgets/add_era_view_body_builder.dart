@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:timelens_dashboard/features/era_crud/presentation/cubit/add_era_cubit/add_era_cubit.dart';
 import 'package:timelens_dashboard/features/era_crud/presentation/views/widgets/add_era_view_body.dart';
-import 'package:timelens_dashboard/features/era_crud/presentation/views/widgets/state_snack_bar.dart';
+import 'package:timelens_dashboard/core/widgets/build_snack_bar.dart';
 
 class AddEraViewBodyBuilder extends StatelessWidget {
   const AddEraViewBodyBuilder({super.key});
@@ -28,7 +28,9 @@ class AddEraViewBodyBuilder extends StatelessWidget {
           );
           // call reset form
           Future.delayed(const Duration(milliseconds: 1500), () {
-            context.read<AddEraCubit>().resetForm();
+            if (context.mounted) {
+              context.read<AddEraCubit>().resetForm();
+            }
           });
         }
       },
