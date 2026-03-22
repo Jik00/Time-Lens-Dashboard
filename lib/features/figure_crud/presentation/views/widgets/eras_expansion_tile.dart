@@ -58,7 +58,7 @@ class _ErasExpansionTileState extends State<ErasExpansionTile> {
                 setState(() {
                   eraNameController.text = widget.eras[index].eraName;
                   expandController.collapse();
-                  widget.belongEraController.text = widget.eras[index].eraCode;
+                  widget.belongEraController.text = widget.eras[index].eraName;
                 });
               },
               child: Container(
